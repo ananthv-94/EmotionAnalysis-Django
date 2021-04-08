@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block rearrange %} 
+{% load static %}
+<div >
+    <form action   method="POST" >
+        {% csrf_token %}
+        <input type="submit" value="angry" name="emo">
+        <input type="submit" value="sad" name="emo">
+        <input type="submit" value="happy" name="emo">
+        <input type="submit" value="surprise" name="emo">
+        <input type="submit" value="fear" name="emo">
+        <input type="submit" value="neutral" name="emo">
+        <input type="submit" value="disgust" name="emo">
+    </form>
+    {% for i in images %}
+        <img src="/static/Emotion/{{emo}}/{{i}}", height="80" width="80" >
+    {%endfor%}
+</div>
+
+<div>
+    <form action="{% url 'move_image' %}", method="POST">
+        {% csrf_token %}
+
+        <input type="hidden" value="{{emo}}" name="from">
+        <select name = 'image'>
+            {% for i in images %}
+                <option  value= "{{i}}">{{i}}</option>
+            {%endfor%}
+        </select>
+        <select name="emo">
+            <option value="angry" >angry</option>
+            <option value="sad" >sad</option>
+            <option value="happy" >happy</option>
+            <option value="surprise" >surprise</option>
+            <option value="fear" >fear</option>
+            <option value="neutral" >neutral</option>
+            <option value="disgust" >disgust</option>
+        </select>
+
+        <input type="submit" value="move" name="move">
+    </form>
+</div>
+{% endblock %}

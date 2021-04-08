@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Emotion Analysis</title>
+    </head>
+    <body>
+        <div >
+            <form action = "{% url 'video' %}"  method="POST" >
+                {% csrf_token %}
+                <input type="submit" value="Emotion Analysis" name="emotion">
+            </form>
+            <form action = "{% url 'rearrange' %}"  method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Rearrange images" name="rearrange"> 
+            </form>          
+            <form action = "{% url 'train' %}"  method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Training" name="train">
+            </form>
+        </div>
+        <div>
+            {% block result %} {% endblock %}
+        </div>
+        <div><br>
+            {% block rearrange %} {% endblock %}
+        </div>
+    </body>
+</html>
